@@ -18,7 +18,7 @@ const AppProvider = ({ children }) => {
     const title = state.title
     axios
       .get(
-        `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=${title}`
+        `https://api.themoviedb.org/3/search/multi?api_key=${api_key}&query=${title}`
       )
       .then((data) => {
         dispatch({ type: 'GET_FILMS', payload: data })
@@ -43,6 +43,8 @@ const AppProvider = ({ children }) => {
   useEffect(() => {
     if (state.title.length > 2) {
       getFilms()
+    } else {
+      dispatch({ type: 'CLEAR_CARDS' })
     }
   }, [state.title])
 
