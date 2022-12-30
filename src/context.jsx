@@ -5,6 +5,9 @@ import reducer from './reducer'
 const AppContext = React.createContext()
 
 let initialValues = {
+  width: window.innerWidth,
+  yourList: [],
+  yourFilmsId: [],
   films: [],
   title: '',
   searchbarOpen: false,
@@ -28,6 +31,31 @@ const AppProvider = ({ children }) => {
       })
   }
 
+  const getSingleFilm = () => {
+    const api_key = 'ae42f8ca15dba712eab0c165b189395d'
+    const filmsId = state.yourFilmsId
+
+    filmsId.map((id) => {
+      fetch(
+        `https://api.themoviedb.org/3/find/${id}?api_key=ae42f8ca15dba712eab0c165b189395d&language=en-US&external_source=imdb_id`
+      )
+        .then((data) => data.json())
+        .then((data) => console.log(data))
+    })
+
+    // filmsId.map((id) => {
+    //   axios
+    //     .get(`https://api.themoviedb.org/3/movie/${id}?api_key=${api_key}`)
+    //     .then((data) => {
+    //       console.log(data)
+    //       dispatch({ type: 'SINGLE_FILM', payload: data })
+    //     })
+    //     .catch((err) => {
+    //       dispatch({ type: 'SINGLE_FILM_ERR', payload: err })
+    //     })
+    // })
+  }
+
   const openSearchbar = () => {
     dispatch({ type: 'OPEN_NAV' })
   }
@@ -40,6 +68,22 @@ const AppProvider = ({ children }) => {
     dispatch({ type: 'CHANGE_TITLE', payload: newTitle })
   }
 
+  const handleResize = () => {
+    dispatch({ type: 'HANDLE_RESIZE' })
+  }
+
+  const addToWatchlist = (id) => {
+    dispatch({ type: 'ADD_FILM', payload: id })
+  }
+
+  useEffect(() => {
+    window.addEventListener('resize', handleResize)
+
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
+
   useEffect(() => {
     if (state.title.length > 2) {
       getFilms()
@@ -48,9 +92,21 @@ const AppProvider = ({ children }) => {
     }
   }, [state.title])
 
+  useEffect(() => {
+    if (state.yourFilmsId) {
+      getSingleFilm()
+    }
+  }, [state.yourFilmsId])
+
   return (
     <AppContext.Provider
-      value={{ ...state, openSearchbar, closeSearchbar, changeTitle }}
+      value={{
+        ...state,
+        openSearchbar,
+        closeSearchbar,
+        changeTitle,
+        addToWatchlist,
+      }}
     >
       {children}
     </AppContext.Provider>

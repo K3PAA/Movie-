@@ -22,7 +22,7 @@ function Search() {
         <BsXLg className='nav-icon' onClick={closeSearchbar} />
       </div>
 
-      <div className='w-10/12 border-2 flex flex-wrap gap-6 justify-center'>
+      <div className='w-full border-t-2 flex flex-wrap gap-6 justify-center py-6'>
         {films.length === 0 ? (
           <h1>Type the name of the film in input field</h1>
         ) : (
