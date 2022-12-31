@@ -40,24 +40,17 @@ const AppProvider = ({ children }) => {
     filmsId.map((item) => {
       const { id, type } = item
 
-      if (type === 'tv') {
-      }
-
-      if (type === 'movie') {
-      }
+      axios
+        .get(`https://api.themoviedb.org/3/${type}/${id}?api_key=${api_key}`)
+        .then((data) => {
+          console.log(data)
+          //dispatch({ type: 'SINGLE_FILM', payload: data })
+        })
+        .catch((err) => {
+          console.log(err)
+          //dispatch({ type: 'SINGLE_FILM_ERR', payload: err })
+        })
     })
-
-    // filmsId.map((id) => {
-    //   axios
-    //     .get(`https://api.themoviedb.org/3/movie/${id}?api_key=${api_key}`)
-    //     .then((data) => {
-    //       console.log(data)
-    //       dispatch({ type: 'SINGLE_FILM', payload: data })
-    //     })
-    //     .catch((err) => {
-    //       dispatch({ type: 'SINGLE_FILM_ERR', payload: err })
-    //     })
-    // })
   }
 
   const openSearchbar = () => {
