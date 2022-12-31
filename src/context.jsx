@@ -35,12 +35,16 @@ const AppProvider = ({ children }) => {
     const api_key = 'ae42f8ca15dba712eab0c165b189395d'
     const filmsId = state.yourFilmsId
 
-    filmsId.map((id) => {
-      fetch(
-        `https://api.themoviedb.org/3/find/${id}?api_key=ae42f8ca15dba712eab0c165b189395d&language=en-US&external_source=imdb_id`
-      )
-        .then((data) => data.json())
-        .then((data) => console.log(data))
+    console.log(filmsId)
+
+    filmsId.map((item) => {
+      const { id, type } = item
+
+      if (type === 'tv') {
+      }
+
+      if (type === 'movie') {
+      }
     })
 
     // filmsId.map((id) => {
@@ -72,8 +76,8 @@ const AppProvider = ({ children }) => {
     dispatch({ type: 'HANDLE_RESIZE' })
   }
 
-  const addToWatchlist = (id) => {
-    dispatch({ type: 'ADD_FILM', payload: id })
+  const addToWatchlist = (id, type) => {
+    dispatch({ type: 'ADD_FILM', payload: { id, type } })
   }
 
   useEffect(() => {

@@ -17,9 +17,6 @@ function SmallNav() {
       <span>
         Sort by :
         <select name='choice'>
-          <option value='first'>most popular</option>
-          <option value='second'>least popular</option>
-          <option value='first'>most popular</option>
           <option value='third' selected>
             A-Z
           </option>

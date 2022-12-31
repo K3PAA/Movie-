@@ -7,6 +7,7 @@ function SingleFilmToAdd({
   name,
   original_name,
   backdrop_path,
+  media_type,
   profile_path,
   original_title,
 }) {
@@ -31,7 +32,7 @@ function SingleFilmToAdd({
             onMouseEnter={() => setIsOver(true)}
             onMouseLeave={() => setIsOver(false)}
             className='text-white bg-black p-4 rounded-md'
-            onClick={() => addToWatchlist(id)}
+            onClick={() => addToWatchlist(id, media_type)}
           >
             add to watchlist
           </button>

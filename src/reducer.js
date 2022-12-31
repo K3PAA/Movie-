@@ -24,7 +24,6 @@ const reducer = (state, action) => {
       .filter((item) => item.vote_average >= 3 || item.popularity >= 3)
       .filter((item, index) => index < numberOfFilms)
 
-    console.log(films)
     return { ...state, films }
   }
 
@@ -42,9 +41,23 @@ const reducer = (state, action) => {
   }
 
   if (action.type === 'ADD_FILM') {
+    const filmsArr = []
+    const newItem = action.payload
+    const items = state.yourFilmsId
+
+    items.push(newItem)
+
+    for (let i = 0; i < items.length; i++) {
+      let is = false
+      for (let y = i + 1; y < items.length; y++) {
+        if (items[i].id === items[y].id) is = true
+      }
+      if (!is) filmsArr.push(items[i])
+    }
+
     return {
       ...state,
-      yourFilmsId: Array.from(new Set([...state.yourFilmsId, action.payload])),
+      yourFilmsId: filmsArr,
     }
   }
 
