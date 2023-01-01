@@ -92,6 +92,15 @@ const AppProvider = ({ children }) => {
     }
   }, [state.yourFilmsId])
 
+  useEffect(() => {
+    const getFilmsId = JSON.parse(
+      window.localStorage.getItem('ADDED_FILMS_IDS')
+    )
+
+    if (getFilmsId !== null)
+      dispatch({ type: 'GET_INITIAL_DATA', payload: getFilmsId })
+  }, [])
+
   return (
     <AppContext.Provider
       value={{

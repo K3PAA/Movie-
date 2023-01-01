@@ -15,7 +15,6 @@ function SingleCard({
   return (
     <div className='relative my-4'>
       <img
-        onMouseOver
         src={`https://image.tmdb.org/t/p/w500/${backdrop_path}`}
         alt=''
         className='object-cover w-80 h-44'

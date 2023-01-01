@@ -37,8 +37,6 @@ const reducer = (state, action) => {
   }
 
   if (action.type === 'HANDLE_RESIZE') {
-    console.log(state.yourList)
-
     return { ...state, width: window.innerWidth }
   }
 
@@ -59,6 +57,8 @@ const reducer = (state, action) => {
       if (!is) filmsArr.push(items[i])
     }
 
+    window.localStorage.setItem('ADDED_FILMS_IDS', JSON.stringify(filmsArr))
+
     return {
       ...state,
       searchbarOpen: false,
@@ -76,6 +76,10 @@ const reducer = (state, action) => {
   if (action.type === 'SINGLE_FILM_ERR') {
     console.log('Error: ' + action.payload)
     return { ...state }
+  }
+
+  if (action.type === 'GET_INITIAL_DATA') {
+    return { ...state, yourFilmsId: action.payload }
   }
   return { ...state }
 }
