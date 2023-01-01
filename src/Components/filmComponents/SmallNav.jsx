@@ -4,17 +4,6 @@ function SmallNav() {
   return (
     <div>
       <span>
-        Category :
-        <select name='choice'>
-          <option value='first'>First Value</option>
-          <option value='second' selected>
-            Second Value
-          </option>
-          <option value='third'>Third Value</option>
-        </select>
-      </span>
-
-      <span>
         Sort by :
         <select name='choice'>
           <option value='third' selected>

@@ -12,17 +12,19 @@ function Films() {
   }, [yourList])
 
   return (
-    <div>
+    <div className='relative'>
       <SmallNav />
 
-      {yourList.length > 0 ? (
-        yourList.map((item, index) => {
-          console.log(item)
-          return <SingleCard key={index} {...item} />
-        })
-      ) : (
-        <h1>Your List is Currently empty</h1>
-      )}
+      <div className='flex flex-wrap gap-6'>
+        {yourList.length > 0 ? (
+          yourList.map((item, index) => {
+            console.log(item)
+            return <SingleCard key={index} {...item} />
+          })
+        ) : (
+          <h1>Your List is Currently empty</h1>
+        )}
+      </div>
     </div>
   )
 }

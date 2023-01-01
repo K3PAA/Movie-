@@ -63,6 +63,7 @@ const reducer = (state, action) => {
       ...state,
       searchbarOpen: false,
       yourFilmsId: filmsArr,
+      title: '',
     }
   }
 
