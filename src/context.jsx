@@ -35,20 +35,17 @@ const AppProvider = ({ children }) => {
     const api_key = 'ae42f8ca15dba712eab0c165b189395d'
     const filmsId = state.yourFilmsId
 
-    console.log(filmsId)
-
     filmsId.map((item) => {
       const { id, type } = item
 
       axios
         .get(`https://api.themoviedb.org/3/${type}/${id}?api_key=${api_key}`)
         .then((data) => {
-          console.log(data)
-          //dispatch({ type: 'SINGLE_FILM', payload: data })
+          dispatch({ type: 'SINGLE_FILM', payload: data })
         })
         .catch((err) => {
           console.log(err)
-          //dispatch({ type: 'SINGLE_FILM_ERR', payload: err })
+          dispatch({ type: 'SINGLE_FILM_ERR', payload: err })
         })
     })
   }

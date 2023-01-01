@@ -37,6 +37,8 @@ const reducer = (state, action) => {
   }
 
   if (action.type === 'HANDLE_RESIZE') {
+    console.log(state.yourList)
+
     return { ...state, width: window.innerWidth }
   }
 
@@ -44,6 +46,8 @@ const reducer = (state, action) => {
     const filmsArr = []
     const newItem = action.payload
     const items = state.yourFilmsId
+
+    state.yourList = []
 
     items.push(newItem)
 
@@ -57,12 +61,15 @@ const reducer = (state, action) => {
 
     return {
       ...state,
+      searchbarOpen: false,
       yourFilmsId: filmsArr,
     }
   }
 
   if (action.type === 'SINGLE_FILM') {
-    return { ...state, yourList: [...state.yourList, action.payload] }
+    let card = action.payload.data
+
+    return { ...state, yourList: [...state.yourList, card] }
   }
 
   if (action.type === 'SINGLE_FILM_ERR') {
