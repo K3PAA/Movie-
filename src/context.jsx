@@ -66,6 +66,10 @@ const AppProvider = ({ children }) => {
     dispatch({ type: 'HANDLE_RESIZE' })
   }
 
+  const removeItem = (id) => {
+    dispatch({ type: 'REMOVE_ITEM', payload: id })
+  }
+
   const addToWatchlist = (id, type) => {
     dispatch({ type: 'ADD_FILM', payload: { id, type } })
   }
@@ -109,6 +113,7 @@ const AppProvider = ({ children }) => {
         closeSearchbar,
         changeTitle,
         addToWatchlist,
+        removeItem,
       }}
     >
       {children}

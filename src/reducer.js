@@ -81,6 +81,20 @@ const reducer = (state, action) => {
   if (action.type === 'GET_INITIAL_DATA') {
     return { ...state, yourFilmsId: action.payload }
   }
+
+  if (action.type === 'REMOVE_ITEM') {
+    const newFilms = state.yourFilmsId.filter((item) => {
+      return item.id !== action.payload
+    })
+
+    window.localStorage.setItem('ADDED_FILMS_IDS', JSON.stringify(newFilms))
+
+    return {
+      ...state,
+      yourFilmsId: newFilms,
+      yourList: [],
+    }
+  }
   return { ...state }
 }
 

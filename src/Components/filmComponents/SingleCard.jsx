@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 
 import { BsXLg } from 'react-icons/bs'
+import { useGlobalContext } from '../../context'
 
 function SingleCard({
   name,
+  id,
   backdrop_path,
   original_name,
   title,
@@ -11,6 +13,7 @@ function SingleCard({
   original_title,
 }) {
   const [isHovered, setIsHovered] = useState(false)
+  const { removeItem } = useGlobalContext()
 
   return (
     <div className='relative my-4'>
@@ -22,7 +25,10 @@ function SingleCard({
         onMouseLeave={() => setIsHovered(false)}
       />
       <div>
-        <button className='text-4xl text-white absolute top-0 right-0 p-2 bg-orange-700'>
+        <button
+          className='text-4xl text-white absolute top-0 right-0 p-2 bg-orange-700'
+          onClick={() => removeItem(id)}
+        >
           <BsXLg />
         </button>
         <h1 className='absolute  -bottom-6 left-0 bg-orange-700 w-full py-1 text-center'>
