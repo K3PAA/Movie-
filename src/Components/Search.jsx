@@ -8,7 +8,7 @@ function Search() {
   const { title, films, changeTitle, closeSearchbar } = useGlobalContext()
 
   return (
-    <nav className='absolute inset-2 bg-sky-300'>
+    <nav className='absolute   inset-1 z-50  bg-sky-300'>
       <div className='flex p-4'>
         <div className='flex gap-2 grow'>
           <input
@@ -22,7 +22,7 @@ function Search() {
         <BsXLg className='nav-icon' onClick={closeSearchbar} />
       </div>
 
-      <div className='w-full border-t-2 flex flex-wrap gap-6 justify-center py-6'>
+      <div className='w-full border-t-2 flex  flex-wrap gap-6 justify-center py-6 '>
         {films.length === 0 ? (
           <h1>Type the name of the film in input field</h1>
         ) : (

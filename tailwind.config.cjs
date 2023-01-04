@@ -5,7 +5,7 @@ module.exports = {
   theme: {
     extend: {
       height: {
-        'mid-range': '80vh',
+        'mid-range': '30vh',
       },
     },
   },

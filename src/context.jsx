@@ -6,9 +6,10 @@ const AppContext = React.createContext()
 
 let initialValues = {
   width: window.innerWidth,
+  sortBy: 'A-Z',
+  queryText: '',
   yourList: [],
   yourFilmsId: [],
-  films: [],
   title: '',
   searchbarOpen: false,
 }
@@ -74,6 +75,14 @@ const AppProvider = ({ children }) => {
     dispatch({ type: 'ADD_FILM', payload: { id, type } })
   }
 
+  const handleSorting = (value) => {
+    dispatch({ type: 'CHANGE_SORTING_ORDER', payload: value })
+  }
+
+  const handleQuery = (text) => {
+    dispatch({ type: 'HANDLE_QUERY', payload: text })
+  }
+
   useEffect(() => {
     window.addEventListener('resize', handleResize)
 
@@ -101,9 +110,23 @@ const AppProvider = ({ children }) => {
       window.localStorage.getItem('ADDED_FILMS_IDS')
     )
 
-    if (getFilmsId !== null)
+    const getSortingOrder = JSON.parse(
+      window.localStorage.getItem('SORTING_ORDER')
+    )
+
+    if (getFilmsId !== null) {
       dispatch({ type: 'GET_INITIAL_DATA', payload: getFilmsId })
+      dispatch({ type: 'CHANGE_SORTING_ORDER', payload: getSortingOrder })
+    }
   }, [])
+
+  useEffect(() => {
+    dispatch({ type: 'QUERY_ONLY' })
+  }, [state.queryText])
+
+  useEffect(() => {
+    dispatch({ type: 'SORTING_FUNCTION' })
+  }, [state.sortBy, state.yourList])
 
   return (
     <AppContext.Provider
@@ -114,6 +137,8 @@ const AppProvider = ({ children }) => {
         changeTitle,
         addToWatchlist,
         removeItem,
+        handleSorting,
+        handleQuery,
       }}
     >
       {children}

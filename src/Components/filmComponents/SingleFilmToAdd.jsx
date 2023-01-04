@@ -5,23 +5,19 @@ function SingleFilmToAdd({
   id,
   title,
   name,
-  original_name,
   backdrop_path,
   media_type,
   profile_path,
-  original_title,
 }) {
   const { addToWatchlist } = useGlobalContext()
   const [isOver, setIsOver] = useState(false)
 
   return (
     <div className='bg-slate-800 p-2 relative rounded-md'>
-      <h1 className='w-72  bg-slate-800 text-white'>
-        {original_title || title || name || original_name}
-      </h1>
+      <h1 className='w-72  bg-slate-800 text-white'>{title || name}</h1>
       <img
         src={`https://image.tmdb.org/t/p/w500/${backdrop_path || profile_path}`}
-        alt={original_title || title || name || original_name}
+        alt={title || name}
         className='object-cover object-center w-72 h-40'
         onMouseEnter={() => setIsOver(true)}
         onMouseLeave={() => setIsOver(false)}

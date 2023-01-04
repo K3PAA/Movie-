@@ -8,13 +8,15 @@ function Films() {
   const { yourList } = useGlobalContext()
 
   return (
-    <div className='relative'>
-      <SmallNav />
+    <div className='relative translate-y-0 bg-slate-700 flex-row gap-3 align-center'>
+      <div>
+        <SmallNav />
+      </div>
 
-      <div className='flex flex-wrap gap-6'>
+      <div className='flex flex-wrap gap-6 pb-10 justify-center'>
         {yourList.length > 0 ? (
           yourList.map((item, index) => {
-            return <SingleCard key={index} {...item} />
+            return item.display && <SingleCard key={index} {...item} />
           })
         ) : (
           <h1>Your List is Currently empty</h1>

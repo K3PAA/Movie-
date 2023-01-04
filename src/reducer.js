@@ -37,6 +37,8 @@ const reducer = (state, action) => {
   }
 
   if (action.type === 'HANDLE_RESIZE') {
+    console.log(state.yourList)
+
     return { ...state, width: window.innerWidth }
   }
 
@@ -70,6 +72,8 @@ const reducer = (state, action) => {
   if (action.type === 'SINGLE_FILM') {
     let card = action.payload.data
 
+    card.display = true
+
     return { ...state, yourList: [...state.yourList, card] }
   }
 
@@ -79,7 +83,9 @@ const reducer = (state, action) => {
   }
 
   if (action.type === 'GET_INITIAL_DATA') {
-    return { ...state, yourFilmsId: action.payload }
+    const initialData = action.payload
+
+    return { ...state, yourFilmsId: initialData }
   }
 
   if (action.type === 'REMOVE_ITEM') {
@@ -95,6 +101,62 @@ const reducer = (state, action) => {
       yourList: [],
     }
   }
+
+  if (action.type === 'CHANGE_SORTING_ORDER') {
+    window.localStorage.setItem('SORTING_ORDER', JSON.stringify(action.payload))
+
+    return { ...state, sortBy: action.payload }
+  }
+
+  if (action.type === 'SORTING_FUNCTION') {
+    function byNameA(a, b) {
+      if ((a.name || a.title) > (b.name || b.title)) {
+        return 1
+      } else if ((a.name || a.title) < (b.name || b.title)) {
+        return -1
+      } else {
+        return 0
+      }
+    }
+
+    function byNameZ(a, b) {
+      if ((a.name || a.title) < (b.name || b.title)) {
+        return 1
+      } else if ((a.name || a.title) > (b.name || b.title)) {
+        return -1
+      } else {
+        return 0
+      }
+    }
+
+    if (state.sortBy === 'A-Z') {
+      state.yourList.sort(byNameA)
+    } else if (state.sortBy === 'Z-A') state.yourList.sort(byNameZ)
+    else if (state.sortBy === 'Score-Best')
+      state.yourList.sort((a, b) => b.vote_average - a.vote_average)
+    else if (state.sortBy === 'Score-Worst')
+      state.yourList.sort((a, b) => a.vote_average - b.vote_average)
+
+    return { ...state }
+  }
+
+  if (action.type === 'HANDLE_QUERY') {
+    return { ...state, queryText: action.payload }
+  }
+
+  if (action.type === 'QUERY_ONLY') {
+    state.yourList.map((item) => {
+      const name = item.name || item.title
+
+      if (!state.queryText) {
+        item.display = true
+      } else if (name.toUpperCase().includes(state.queryText.toUpperCase())) {
+        item.display = true
+      } else item.display = false
+    })
+    return { ...state }
+  }
+
   return { ...state }
 }
 

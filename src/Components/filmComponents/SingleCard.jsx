@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 
 import { BsXLg } from 'react-icons/bs'
+import { Link } from 'react-router-dom'
 import { useGlobalContext } from '../../context'
 
 function SingleCard({
@@ -37,17 +38,6 @@ function SingleCard({
         <p className='absolute top-0 left-0 px-2 py-2 bg-orange-700 text-center'>
           {vote_average.toFixed(2)}
         </p>
-        {/* Link to */}
-        {isHovered && (
-          <a
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-            href='#'
-            className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded px-2 py-2 text-white bg-black'
-          >
-            See more
-          </a>
-        )}
       </div>
     </div>
   )
