@@ -11,7 +11,7 @@ function App() {
       <header className='py-4'>
         <Nav />
       </header>
-      <Background />
+
       <Films />
     </div>
   )

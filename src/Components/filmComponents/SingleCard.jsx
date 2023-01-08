@@ -17,7 +17,7 @@ function SingleCard({
   const { removeItem } = useGlobalContext()
 
   return (
-    <div className='relative my-4'>
+    <div className='relative my-4 '>
       <img
         src={`https://image.tmdb.org/t/p/w500/${backdrop_path}`}
         alt=''
@@ -35,7 +35,7 @@ function SingleCard({
         <h1 className='absolute  -bottom-6 left-0 bg-orange-700 w-full py-1 text-center'>
           {name || original_name || title || original_title}
         </h1>
-        <p className='absolute top-0 left-0 px-2 py-2 bg-orange-700 text-center'>
+        <p className='absolute top-0 left-0 px-2  bg-orange-700 text-center'>
           {vote_average.toFixed(2)}
         </p>
       </div>

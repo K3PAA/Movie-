@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  body {
+    @apply bg-slate-700;
+  }
+}
+
 @layer components {
   .nav-icon {
     @apply text-5xl cursor-pointer;
